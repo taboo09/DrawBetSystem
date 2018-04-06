@@ -1,0 +1,32 @@
+@model BetSystem.Controllers.Resources.TeamResource
+
+<title>Add Team</title>
+
+<div class="form-team">
+    <h2>Add New Team</h2>
+
+    @using (Html.BeginForm("AddTeam", "Team"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, "New Team")
+            @Html.TextBoxFor(m => m.Name,new { @class="form-control"})
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        @Html.HiddenFor(m => m.Id)
+
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    }
+</div>
+
+<div class="teams-display">
+    <h2>Teams in Database:</h2>
+    
+        @foreach(var t in ViewBag.Teams)
+        {
+            <button>@t.Name</button>
+        }
+    
+</div>

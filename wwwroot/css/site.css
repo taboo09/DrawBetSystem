@@ -1,0 +1,291 @@
+﻿html, body{
+    height: 100%;
+    
+}
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+.input-validation-error{
+    border: 1px solid red;
+}
+.field-validation-error{
+    color:red;
+    font-size: 80%;
+}
+.validation-summary-errors{
+    color:red;
+}
+
+form {
+    width: 40%;
+}
+form label{
+    font-size: 1.3rem;
+}
+form > div.form-group > select > option{
+    margin: 2px 0;
+}
+
+.edit{
+    font-size: 100%;
+    padding: 2% 5% 2% 5%;
+}
+.edit:hover{
+    color: purple;
+}
+.display-options-bets{
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: inherit;
+}
+.display-options-bets span{
+    color: inherit;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+.display-options-bets span:hover{
+    text-decoration: underline;
+}
+
+
+footer{
+    height: 0px;
+    bottom: 0;
+    margin: 0 auto 2em auto;
+	padding: 0.6em 0 0.1em 0;
+}
+#hidden{
+    position: inherit;
+    width: 50%;
+}
+
+td div.winner{
+    background-color: green;
+    width: 48%;
+    text-align: center;
+    /* padding: 5%; */
+}
+
+/* popout div */
+div.popout{
+    width: 100%;
+	height: 100%;
+	opacity: .9;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background-color: rgb(0,0,27);
+	overflow: auto;
+}
+div.edit-delete-bet{
+    position: relative;
+    overflow: auto;
+    margin: 0;
+    width: 100%;
+    height: 70%;
+    top: 20%;
+    padding: 0 10%;
+	position: fixed;
+	background-color: rgb(42, 25, 71);
+}
+div.delete-bet-view{
+    margin-bottom: 16px;
+}
+div.delete-bet-view div.form-group input{
+    padding: 0 16px;
+    height: 30px;
+}
+
+div#bet_edit_info span{
+    font-size: 125%;
+    font-weight: bold;
+}
+div#bet_edit_info input{
+    width: 40%;
+}
+div#bet_edit_info label{
+    margin-right: 3px;
+}
+td.select_team{
+    cursor: pointer;
+}
+span.sort_desc{
+    cursor: pointer;
+}
+td.select_team:hover{
+    text-decoration: underline;
+}
+.form-team{
+    width: 60%;
+    float: left;
+}
+.form-team form{
+    width: 70%;
+}
+.teams-display{
+    width: 40%;
+    display: inline-block;
+}
+.teams-display ol{
+    margin-left: -20px;
+    font-size: 90%;
+}
+header{
+    background-color: #293949;
+    padding: 10px;
+    margin: -2% 0 2% 0;
+    border-radius: 0 0 25px 25px;
+    text-align: center;
+    box-shadow: 0 2px 10px #777;
+}
+p.currency{
+    cursor: pointer;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+div.select-currency .form-group select{
+    background-color: #2b3e50;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+div.select-currency .form-group, button{
+    width: 100px;
+    display: inline-block;
+}
+div.select-currency button{
+    margin-top: -4px;
+    border-radius:6px;
+    margin-left:10px;
+    background-color: #df691a;;
+    border:1px solid #fff;
+    padding: 0;
+}
+div.team-status{
+    width: 55%;
+    float: left;
+    border-right: 1px solid #596a7b;
+}
+div.stats{
+    display: inline-block;
+    width: 40%;
+    margin-left: 5%
+}
+.stats h2,.stats h3{
+    text-align: center;
+}
+div.total-profit{
+    width: 55%;
+    float: left;
+    border-right: 1px solid #596a7b;
+}
+div.max-stats{
+    width: 45%;
+    float: left;
+}
+.stats table{
+    margin-left: 5%;
+}
+div.stats table td {
+    padding: 4px 15px;
+    font-size: 1.7rem;
+}
+div.stats table td:last-child {
+    color: burlywood;
+    font-weight: 600;
+}
+
+/* team-info */
+div.team-info{
+    width: 100%;
+    display: inline-block;
+}
+div.team-info div.info{
+    display: inline-block;
+    margin-top: 10px;
+    width: 24%;
+    text-align: center;
+}
+div.info-number{
+    width: 100%;
+    padding: 6% 0;
+}
+.info:nth-child(odd) .info-number{
+    background-color: #FF4136;
+}
+.info:nth-child(even) .info-number{
+    background-color: #001f3f;
+}
+
+
+
+.team-status table{
+    border:0;
+}
+.team-status table > tbody > tr > td{
+    padding: 3px;
+}
+.team-status table > tbody > tr > td span.profit-high{
+    background-color: green;
+    text-align: center;
+    padding: 3px 10px;
+}
+
+
+div.popout{
+    width: 100%;
+	height: 100%;
+	opacity: .95;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background-color: rgb(0,0,27);
+	overflow: auto;
+}
+div.edit-info-bet{
+    position: relative;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    top: 20%;
+    padding: 2% 10%;
+	position: fixed;
+	background-color: rgb(42, 25, 71);
+}
+
+div.delete-bet{
+    float: right;
+}
+
+div.teams-display button{
+    border-radius: 5px;
+    margin: 3px 2px;
+    cursor: default;
+}
+div.teams-display button.btn-secondary{
+    color: #df691a;
+}
+div.teams-display button.btn-link{
+    border: 1px solid #df691a;
+}

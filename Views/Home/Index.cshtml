@@ -1,0 +1,159 @@
+﻿@model IEnumerable<BetSystem.Controllers.Resources.TeamStatus>
+
+@{ IEnumerable<BetSystem.Controllers.Resources.BetResource> listBets = ViewBag.Bets; }
+@{ IEnumerable<BetSystem.Models.Currency> currencies = ViewBag.Currencies; }
+@{ string p = "%"; }
+@{ int numberTeams = 0; }
+@{ string currency = ViewBag.Currency.Symbol; }
+@{ double totalBet = Model.Sum(x => x.MoneyBet); }
+@{ double totalEarn = Model.Sum(x => x.MoneyEarn); }
+@{ double totalProfit = Math.Round(totalEarn - totalBet,2); }
+@{ int totalPlayed = Model.Sum(x => x.MatchesPlayed); }
+@{ int wons = Model.Sum(x => x.Wons); }
+@{ double wonPercentage = Math.Truncate((double)wons / (double)totalPlayed * 100); }
+@{ double maxStake = listBets.Max(x => x.Match.Stake); }
+@{ double maxReturn = listBets.Max(x => x.Profit); }
+@{ double maxOdd = listBets.Where(x => x.Won == true).Max(x => x.Match.Odd); }
+@{ double weekProfit = Math.Truncate(@totalProfit/ViewBag.Weeks); }
+
+
+<header>
+    <title>Teams</title>
+    <h2>Draw Betting System &rarr; Weekly Profit: @currency@weekProfit</h2>
+</header>
+
+<body>
+    <div class="container">
+        <p class="currency">Currency: @ViewBag.Currency.Name</p>
+        <div class="select-currency" style="display:none">
+            @using (Html.BeginForm("SelectCurrency", "Home"))
+            {
+                <div class="form-group">
+                    @Html.DropDownList("Id", new SelectList(currencies, "Id", "Name"), new { @class="form-control" })
+                </div>
+                <button type="submit" class="btn btn-secondary">Select</button>
+            }
+        </div>
+        <div class="team-status">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Nr</th>
+                    <th>Team</th>
+                    <th>Played/Won</th>
+                    <th>Won %</th>
+                    <th>Total Bet</th>
+                    <th>Total Earn</th>
+                    <th>Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var t in Model)
+                {
+                <tr onMouseOver="div_show($('tr').index(this))" onMouseOut="div_hide($('tr').index(this))">
+                    <td></td>
+                    <td>@t.Name</td>
+                    <td>@t.MatchesPlayed / @t.Wons</td>
+                    <td>@t.Percentage @p</td>
+                    <td>@currency@t.MoneyBet</td>
+                    <td>@currency@t.MoneyEarn</td>
+                    @if(t.Profit < 0) {
+                    <td>-@currency@Math.Abs(t.Profit)</td>
+                    } 
+                    else {
+                        <td><span class="profit-high">@currency@Math.Round(t.Profit,2)</span></td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+        <div class="stats">
+            <div class="total-profit">
+                <h3>TOTAL</h3>
+                <table>
+                    <tr>
+                        <td>Betting</td><td>@currency@totalBet</td>
+                    </tr>
+                    <tr>
+                        <td>Earning</td><td>@currency@totalEarn</td>
+                    </tr>
+                    <tr>
+                        <td>Profit</td>@if(totalProfit < 0){
+                            <td style="font-size:2rem;color:beige">-@currency@Math.Abs(totalProfit)</td>
+                        } else {
+                            <td style="font-size:2rem;color:beige">@currency@totalProfit</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td>Matches</td><td>@totalPlayed</td>
+                    </tr>
+                    <tr>
+                        <td>Won</td><td>@wons</td>
+                    </tr>
+                    <tr>
+                        <td>Won %</td><td>@wonPercentage %</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="max-stats">
+                <h3>MAX</h3>
+                <table>
+                    <tr>
+                        <td>Stake</td><td>@currency@maxStake</td>
+                    </tr>
+                    <tr>
+                        <td>Return</td><td>@currency@maxReturn</td>
+                    </tr>
+                    <tr>
+                        <td>Odd</td><td>@maxOdd</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Display info for each team, div show on hover table team tr -->
+            @foreach(var t in Model) 
+            {
+                numberTeams = numberTeams + 1;
+                string idTeam = "team" + numberTeams.ToString(); 
+                <div id="@idTeam" class="team-info hidden">
+                    <h2>@t.Name</h2>
+                    <div class="info">
+                        <h4>Profit</h4>
+                        <div class="info-number">
+                            @if(t.Profit < 0 ){
+                                <h4>-@currency@Math.Abs(t.Profit)</h4>
+                            } else {
+                                <h4>@currency@t.Profit</h4>
+                            }
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>Nr. Matches</h4>
+                        <div class="info-number">
+                            <h4>@t.MatchesPlayed</h4>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>Won %</h4>
+                        <div class="info-number">
+                            <h4>@t.Percentage @p</h4>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <h4>Next Stake</h4>
+                        <div class="info-number">
+                            <h4>@currency@t.NextStake</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div> 
+    </div>
+</body>
+
+@section scripts
+{
+    <script>
+    </script>
+}

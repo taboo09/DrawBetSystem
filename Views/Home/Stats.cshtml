@@ -1,0 +1,150 @@
+@model IEnumerable<BetSystem.Controllers.Resources.TeamStatus>
+
+@{ IEnumerable<BetSystem.Controllers.Resources.ProfitStatus> listDates = ViewBag.ProfitList; }
+@{ string currency = ViewBag.Currency.Symbol; }
+
+<title>Statistics</title>
+
+<h3>Team Statistics - @currency Profit </h3>
+
+<div style="width: auto; height: 550px">
+    <canvas id="myChart" width="auto" ></canvas>
+</div>
+
+<h3>Date Statistics - @currency Profit & Won Rate</h3>
+
+<div style="width: auto; height: 550px">
+    <canvas id="myChartProfit" width="auto" ></canvas>
+</div>
+
+
+
+<script src="/lib/chart.js/dist/chart.js"></script>
+
+<script>
+    var teamNames = [];
+    var teamProfit = [];
+    @foreach(var item in Model){
+        @:teamNames.push("@item.Name");
+        @:teamProfit.push(@item.Profit);
+    }
+
+    bgColor = [ 'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'];
+    brColor = [ 'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'];
+
+backgroundColors = [];
+borderColors = [];
+var index = 0;
+
+for (let i = 0; i < teamNames.length; i++) {
+    if(index >= bgColor.length) index = 0;
+    backgroundColors.push(bgColor[index]);
+    borderColors.push(brColor[index]);
+    index++;
+}
+
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: teamNames,
+        datasets: [{
+            label: 'Team / Profit',
+            data: teamProfit,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    stepSize: 1,
+                    autoSkip: false
+                }
+            }]
+        }
+    }
+});
+
+    
+    var dates = [];
+    var profitPerDay = [];
+    var profitTotal = [];
+    var wonRate = [];
+    var profitTemp = 0;
+
+    @foreach(var item in listDates){
+        @:dates.push('@item.Date.ToString("dd/MM/yyyy")');
+        @:var prof = @item.Profit;
+        @:profitPerDay.push(prof.toFixed(2));
+        @:profitTemp = profitTemp + @item.Profit;
+        @:profitTotal.push(profitTemp.toFixed(2));
+        @:wonRate.push(@item.Percentage);
+    }
+    
+
+    var chartLine = document.getElementById("myChartProfit").getContext('2d');
+    var stackedLine = new Chart(chartLine, {
+    type: 'line',
+    data: {
+        labels: dates,
+        datasets: [{
+            label: 'Date / Profit',
+            data: profitPerDay,
+            backgroundColor: bgColor[2],
+            borderColor: brColor[5],
+            pointBorderColor: brColor[4],
+            pointBackgroundColor: brColor[4],
+            borderWidth: 1,
+            pointHoverBorderWidth: 3
+        },
+        {
+            label: 'Date / TotalProfit',
+            data: profitTotal,
+            backgroundColor: bgColor[0],
+            borderColor: brColor[1],
+            pointBorderColor: brColor[3],
+            pointBackgroundColor: bgColor[3],
+            borderWidth: 1,
+            pointHoverBorderWidth: 3
+        },
+        {
+            label: 'Date / Won Rate %',
+            data: wonRate,
+            backgroundColor: bgColor[3],
+            borderColor: brColor[2],
+            pointBorderColor: brColor[1],
+            pointBackgroundColor: brColor[5],
+            borderWidth: 1,
+            pointHoverBorderWidth: 3
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+});
+</script>

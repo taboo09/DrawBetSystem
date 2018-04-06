@@ -1,0 +1,91 @@
+@model IEnumerable<BetSystem.Controllers.Resources.BetResource>
+
+<title>All Bets</title>
+
+<h2 class="title">Displayed Bets: <span></span></h2>
+
+@{ string currency = ViewBag.Currency.Symbol; }
+@{ int NrBets = 0; }
+@{ string classTr = "settled"; }
+
+<div class="display-options-bets">
+    <span class="all">
+        display all
+    </span>|
+    <span class="last10">
+        display last 10
+    </span>|
+    <span class="unsettled">
+        display unsettled
+    </span>
+    <div class="delete-bet">
+        <label  for="delbet">
+            <span>Delete Bet</span>
+        </label>
+        <input class="form-check-input" type="checkbox" value="" id="delbet">
+    </div>
+</div>
+
+<table id="bets" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nr</th>
+            <th>Team</th>
+            <th>Date</th>
+            <th>Match</th>
+            <th>Odd</th>
+            <th>Stake</th>
+            <th>Return ?</th>
+            <th>Won</th>
+            <th>Withdrawal</th>
+            <th>Profit <span class="glyphicon glyphicon-upload" onclick="tableSort('nth-child(10)','desc')"></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+          @if(item.Won == null){ classTr = "unsettled";}
+            else { classTr = "settled"; }
+            NrBets = NrBets + 1;
+            <tr class="@classTr">
+                <td>@NrBets</td>
+                <td class="select_team" onclick="display_bets_team($(this).text())">@item.Match.Team.Name</td>
+                <td>@item.Match.Date.ToString("dd/MM/yyyy")</td>
+                <td>@item.Match.Home - @item.Match.Away</td>
+                <td>@item.Match.Odd</td>
+                <td>@currency@item.Match.Stake</td>
+                <td>@currency@item.Match.CashReturn</td>
+                
+                @if(item.Won == true) 
+                { <td><div class="winner"> Yes</div></td> }
+                @if(item.Won == false) 
+                { <td>No</td> }
+                @if(item.Won == null) 
+                {
+                    <td>
+                    <input type="button" value="Edit" class="btn btn-info edit" 
+                        onclick="$('.edit-delete-bet').load('@Url.Action("BetEdit","Bet", new { id = item.Id })')" />           
+                    </td>
+                }
+                <td>@currency@item.Withdrawal</td>
+                <td>@currency@item.Profit</td>
+                <td class="delete-bet" style="display:none"><button type="button" 
+                onclick="$('.edit-delete-bet').load('@Url.Action("FindBet","Bet", new { id = item.Id })')"
+                class="btn btn-danger btn-sm" style="padding:0 5px; margin:-2px">Delete</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!------------------- Popout div ------------------------>
+<div class="popout" style="display: none">
+    <div class="edit-delete-bet">
+    </div>
+</div>
+
+@section scripts
+{
+    <script>      
+    </script>
+}

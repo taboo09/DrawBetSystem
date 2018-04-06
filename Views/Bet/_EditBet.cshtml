@@ -1,0 +1,41 @@
+@model BetSystem.Controllers.Resources.BetResource
+
+@{ string currency = ViewBag.Currency.Symbol; }
+
+<div id="bet_edit_info">
+    <h4>You are about to edit bet Id Nr: <span>@Model.Id</span></h4>
+    <h5>Team: <span>@Model.Match.Team.Name</span>, match <span>@Model.Match.Home - @Model.Match.Away</span>
+    from the date: <span>@Model.Match.Date.ToString("dd/MM/yyyy")</span></h5>
+    <h5>Cash Return:</h5>
+    <h3>@currency@Model.Match.CashReturn</h3>
+
+<hr>
+
+    @using (Html.BeginForm("SaveBet", "Bet"))
+    {
+    <div class="form-group">
+        <h5>Was this bet won:</h5>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+                @Html.RadioButtonFor(m => m.Won, "true", new { @class="form-control"} ) Yes
+            </label>
+            
+            <label class="btn btn-primary">
+                @Html.RadioButtonFor(m => m.Won, "false", new { @class="form-control"} ) No
+            </label>
+        </div>     
+    </div>
+
+    <div class="form-group">
+        <h5>Set Withdrawal for this bet (0 if the bet was lost):</h5>
+        <input class="form-control" data-val="true" 
+                data-val-required="The Withdrawal field is required." id="Withdrawal"
+                name="Withdrawal" type="number" step="any" value="0">
+    </div>
+
+    @Html.HiddenFor(m => m.Id)
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="cancel" class="btn btn-warning" onclick="location.href='@Url.Action("GetBets", "Bet")';return false;">Cancel</button>
+    } 
+</div>

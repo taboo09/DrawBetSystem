@@ -1,0 +1,45 @@
+@model BetSystem.Controllers.Resources.BetResource
+
+<h3>Delete Bet Id @Model.Id</h3>
+<div class="delete-bet-view">
+@using (Html.BeginForm("DeleteBet", "Bet", new { id = Model.Id }))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => c.Match.Team.Name, "Team Name")
+        @Html.TextBoxFor(c => c.Match.Team.Name, new { @class="form-control"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Match.Home)
+        @Html.TextBoxFor(c => c.Match.Home, new { @class="form-control"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Match.Away)
+        @Html.TextBoxFor(c => c.Match.Away, new { @class="form-control"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Match.Date,"Match Date")
+        @Html.TextBoxFor(c => c.Match.Date, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Match.Odd)
+        @Html.TextBoxFor(c => c.Match.Odd, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Match.Stake)
+        @Html.TextBoxFor(c => c.Match.Stake, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="cancel" class="btn btn-warning" onclick="location.href='@Url.Action("GetBets", "Bet")';return false;">Cancel</button>
+}
+</div>
+<script>
+    $(document).ready(function() {
+        $('input').attr('disabled',true);
+    });
+</script>

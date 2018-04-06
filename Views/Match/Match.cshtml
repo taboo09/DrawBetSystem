@@ -1,0 +1,51 @@
+@model BetSystem.Controllers.Resources.MatchResource
+
+<title>Add Bet</title>
+
+<h3>Add New Bet</h3>
+
+
+@using (Html.BeginForm("AddMatch", "Match"))
+{
+    <div class="form-group">
+        @Html.LabelFor(c => c.TeamId, "Team")
+        @Html.DropDownListFor(c => c.TeamId, new SelectList(Model.Teams, "Id", "Name"), "Select Team", new { @class="form-control" })        
+        @Html.ValidationMessageFor(m => m.TeamId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Home)
+        @Html.TextBoxFor(c => c.Home, new { @class="form-control"})
+        @Html.ValidationMessageFor(m => m.Home)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Away)
+        @Html.TextBoxFor(c => c.Away, new { @class="form-control"})
+        @Html.ValidationMessageFor(m => m.Away)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Date,"Match Date (M-d-YYYY)")
+        @Html.TextBoxFor(c => c.Date, "{0:M/d/yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Date)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Odd)
+        @Html.TextBoxFor(c => c.Odd, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Odd)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(c => c.Stake)
+        @Html.TextBoxFor(c => c.Stake, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Stake)
+    </div>
+
+    @Html.HiddenFor(c => c.Id)
+
+    @Html.AntiForgeryToken()
+
+    <button type="submit" class="btn btn-primary">Add</button>
+}
