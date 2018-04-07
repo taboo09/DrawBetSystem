@@ -29,7 +29,7 @@
   "bundleDependencies": false,
   "dependencies": {
     "chartjs-color": "~2.2.0",
-    "moment": "~2.18.0"
+    "moment": "~2.19.3"
   },
   "deprecated": false,
   "description": "Simple HTML5 charts using the canvas element.",
