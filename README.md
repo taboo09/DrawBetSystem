@@ -9,7 +9,6 @@ The concept is quite simple, you choose a team and place DRAW bets. After every 
 The app is build in Microsoft AspNetCore 2.0.0 FrameWork, using Microsoft EntityFrameworkCore 2.0.1 Code First Migrations and AutoMapper 6.1.1
 Copy the files, install packages, enable EF Migrations and run a initial migration to create the database tables.
 From terminal or command prompt type `dotnet restore`.
-Add currencies in Currency table(manually or through CurrencyAPI using Postman. Ex: `{"name":"USD", "symbol":"$", "isSelected":true}`
 Finally type `dotnet run`.
 
 ## How it works
