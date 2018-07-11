@@ -1,0 +1,19 @@
+@model BetSystem.Models.Season
+
+<div class="container">
+    <h2>Do you want to close season <span style="color:orangered">@Model?.Name</span>?</h2>
+    <h4 class="validation-summary-errors">This process is irreversible!</h4>
+    <h4 class="validation-summary-errors">Teams and bets cannot be added, deleted or edited.</h4>
+
+    <div class="well well-sm">
+        <h3>@Model?.Name, <span style="font-size: 75%">added on</span> @Model?.DateStart.ToString("dd/MM/yyyy")</h3>
+        </br>
+
+        <a href='@Url.Action("CloseSeason", "Season", new { id = Model.Id} )'>
+            <button class="btn btn-lg btn-warning">Close</button>
+        </a>
+        <a href='@Url.Action("Seasons", "Season")'>
+            <button class="btn btn-lg btn-info">Cancel</button>
+        </a>
+    </div>
+</div>

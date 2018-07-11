@@ -36,7 +36,7 @@ namespace BetSystem.Controllers
             var betResource = await betRepository.GetBet(id);
 
             ViewBag.Currency = await currencyRepository.GetCurrency();
-
+ 
             return PartialView("_EditBet", betResource);
         }
 

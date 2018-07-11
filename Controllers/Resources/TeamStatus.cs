@@ -11,5 +11,6 @@ namespace BetSystem.Controllers.Resources
         public double MoneyEarn { get; set; }
         public double NextStake { get; set; }
         public double Profit { get; set; }
+        public bool SeasonActive { get; set; }
     }
 }

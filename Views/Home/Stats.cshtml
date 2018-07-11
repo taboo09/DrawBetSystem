@@ -1,21 +1,24 @@
-@model IEnumerable<BetSystem.Controllers.Resources.TeamStatus>
+@model BetSystem.Controllers.Resources.ViewModelProfitStatus
 
-@{ IEnumerable<BetSystem.Controllers.Resources.ProfitStatus> listDates = ViewBag.ProfitList; }
 @{ string currency = ViewBag.Currency.Symbol; }
+@{ string displayCanvas = (Model.TeamStatusList.Any() ? "block" : "hidden"); }
 
 <title>Statistics</title>
 
+@if(!Model.TeamStatusList.Any()) { <h4 class="validation-summary-errors">There are no teams to display statistics!</h4> }
+
 <h3>Team Statistics - @currency Profit </h3>
 
-<div style="width: auto; height: 550px">
+<div class="@displayCanvas" style="width: auto; height: 550px">
     <canvas id="myChart" width="auto" ></canvas>
 </div>
 
 <h3>Date Statistics - @currency Profit & Won Rate</h3>
 
-<div style="width: auto; height: 550px">
+<div class="@displayCanvas" style="width: auto; height: 550px">
     <canvas id="myChartProfit" width="auto" ></canvas>
 </div>
+
 
 
 
@@ -24,7 +27,7 @@
 <script>
     var teamNames = [];
     var teamProfit = [];
-    @foreach(var item in Model){
+    @foreach(var item in Model.TeamStatusList){
         @:teamNames.push("@item.Name");
         @:teamProfit.push(@item.Profit);
     }
@@ -93,7 +96,7 @@ var myChart = new Chart(ctx, {
     var wonRate = [];
     var profitTemp = 0;
 
-    @foreach(var item in listDates){
+    @foreach(var item in Model.ProfitStatusList){
         @:dates.push('@item.Date.ToString("dd/MM/yyyy")');
         @:var prof = @item.Profit;
         @:profitPerDay.push(prof.toFixed(2));

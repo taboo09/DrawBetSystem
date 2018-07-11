@@ -31,6 +31,7 @@ namespace BetSystem
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IBetRepository, BetRepository>();
             services.AddScoped<ICurrencyRepository, CurrencyRepository>();
+            services.AddScoped<ISeasonRepository, SeasonRepository>();
 
             services.AddAutoMapper();
 

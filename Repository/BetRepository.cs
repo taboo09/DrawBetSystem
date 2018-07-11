@@ -24,7 +24,13 @@ namespace BetSystem.Repository
 
         public async Task<IEnumerable<BetResource>> GetBets()
         {
-            var bets = await context.Bets.Include(m => m.Match).ThenInclude(t => t.Team).ToListAsync();
+            var bets = await context.Bets
+                .Include(m => m.Match)
+                .ThenInclude(t => t.Team)
+                .ThenInclude(s => s.Season)
+                .ToListAsync();
+
+            bets = bets.Where(x => x.Match.Team.Season.Selected).OrderBy(x => x.Match.Date).ToList();
 
             var betsResources = mapper.Map<List<Bet>, List<BetResource>>(bets);
 

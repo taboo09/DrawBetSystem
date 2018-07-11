@@ -86,6 +86,32 @@ namespace BetSystem.Migrations
                     b.ToTable("Matches");
                 });
 
+            modelBuilder.Entity("BetSystem.Models.Season", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
+
+                    b.Property<int>("Bets");
+
+                    b.Property<DateTime?>("DateEnd");
+
+                    b.Property<DateTime>("DateStart");
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("Profit");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("Teams");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Seasons");
+                });
+
             modelBuilder.Entity("BetSystem.Models.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -95,7 +121,11 @@ namespace BetSystem.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
+                    b.Property<int>("SeasonId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SeasonId");
 
                     b.ToTable("Teams");
                 });
@@ -113,6 +143,14 @@ namespace BetSystem.Migrations
                     b.HasOne("BetSystem.Models.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BetSystem.Models.Team", b =>
+                {
+                    b.HasOne("BetSystem.Models.Season", "Season")
+                        .WithMany()
+                        .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

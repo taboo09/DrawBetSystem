@@ -1,39 +1,21 @@
 ﻿@model IEnumerable<BetSystem.Controllers.Resources.TeamStatus>
 
-@{ IEnumerable<BetSystem.Controllers.Resources.BetResource> listBets = ViewBag.Bets; }
-@{ IEnumerable<BetSystem.Models.Currency> currencies = ViewBag.Currencies; }
 @{ string p = "%"; }
 @{ int numberTeams = 0; }
 @{ string currency = ViewBag.Currency.Symbol; }
-@{ double totalBet = Model.Sum(x => x.MoneyBet); }
-@{ double totalEarn = Model.Sum(x => x.MoneyEarn); }
-@{ double totalProfit = Math.Round(totalEarn - totalBet,2); }
-@{ int totalPlayed = Model.Sum(x => x.MatchesPlayed); }
-@{ int wons = Model.Sum(x => x.Wons); }
-@{ double wonPercentage = Math.Truncate((double)wons / (double)totalPlayed * 100); }
-@{ double maxStake = listBets.Max(x => x.Match.Stake); }
-@{ double maxReturn = listBets.Max(x => x.Profit); }
-@{ double maxOdd = listBets.Where(x => x.Won == true).Max(x => x.Match.Odd); }
-@{ double weekProfit = Math.Truncate(@totalProfit/ViewBag.Weeks); }
 
+<title>Teams</title>
 
-<header>
-    <title>Teams</title>
-    <h2>Draw Betting System &rarr; Weekly Profit: @currency@weekProfit</h2>
-</header>
+<div class="container">
+   @await Component.InvokeAsync("SelectedSeason", new { title = "Draw Betting System" })
 
-<body>
-    <div class="container">
-        <p class="currency">Currency: @ViewBag.Currency.Name</p>
-        <div class="select-currency" style="display:none">
-            @using (Html.BeginForm("SelectCurrency", "Home"))
-            {
-                <div class="form-group">
-                    @Html.DropDownList("Id", new SelectList(currencies, "Id", "Name"), new { @class="form-control" })
-                </div>
-                <button type="submit" class="btn btn-secondary">Select</button>
-            }
-        </div>
+    @if(!Model.Any()) {
+        <h4 class="validation-summary-errors">There are no teams to display! Add teams and bets to load statistics.</h4>
+        }
+
+        <p class="show-div">Currency: @ViewBag.Currency.Name</p>
+        @await Component.InvokeAsync("SelectCurrency")
+
         <div class="team-status">
         <table class="table table-bordered table-hover">
             <thead>
@@ -68,48 +50,9 @@
             </tbody>
         </table>
         </div>
-        <div class="stats">
-            <div class="total-profit">
-                <h3>TOTAL</h3>
-                <table>
-                    <tr>
-                        <td>Betting</td><td>@currency@totalBet</td>
-                    </tr>
-                    <tr>
-                        <td>Earning</td><td>@currency@totalEarn</td>
-                    </tr>
-                    <tr>
-                        <td>Profit</td>@if(totalProfit < 0){
-                            <td style="font-size:2rem;color:beige">-@currency@Math.Abs(totalProfit)</td>
-                        } else {
-                            <td style="font-size:2rem;color:beige">@currency@totalProfit</td>
-                        }
-                    </tr>
-                    <tr>
-                        <td>Matches</td><td>@totalPlayed</td>
-                    </tr>
-                    <tr>
-                        <td>Won</td><td>@wons</td>
-                    </tr>
-                    <tr>
-                        <td>Won %</td><td>@wonPercentage %</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="max-stats">
-                <h3>MAX</h3>
-                <table>
-                    <tr>
-                        <td>Stake</td><td>@currency@maxStake</td>
-                    </tr>
-                    <tr>
-                        <td>Return</td><td>@currency@maxReturn</td>
-                    </tr>
-                    <tr>
-                        <td>Odd</td><td>@maxOdd</td>
-                    </tr>
-                </table>
-            </div>
+
+        <div class="stats container">
+            @await Component.InvokeAsync("IndexStats", @currency)
 
             <!-- Display info for each team, div show on hover table team tr -->
             @foreach(var t in Model) 
@@ -148,9 +91,8 @@
                     </div>
                 </div>
             }
-        </div> 
-    </div>
-</body>
+        </div>
+</div>
 
 @section scripts
 {

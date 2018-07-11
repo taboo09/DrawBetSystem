@@ -14,9 +14,14 @@ namespace BetSystem.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamRepository teamRepository;
-        public TeamController(ITeamRepository teamRepository)
+        private readonly ISeasonRepository seasonRepository;
+        private readonly IMapper mapper;
+
+        public TeamController(ITeamRepository teamRepository, ISeasonRepository seasonRepository, IMapper mapper)
         {
             this.teamRepository = teamRepository;
+            this.seasonRepository = seasonRepository;
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> New()
@@ -24,6 +29,10 @@ namespace BetSystem.Controllers
             ViewBag.Teams = await teamRepository.GetTeams();
 
             var teamResource = new TeamResource();
+            
+            Season selectedSeason = await seasonRepository.IsSelected();
+            teamResource.SeasonId = selectedSeason.Id;
+            teamResource.Season = mapper.Map<SeasonResource>(selectedSeason);
 
             return View("AddTeam", teamResource);
         }
@@ -36,13 +45,15 @@ namespace BetSystem.Controllers
             {
                 ViewBag.Teams = await teamRepository.GetTeams();
 
-                var teamRes = new TeamResource();
+                // var teamRes = new TeamResource();
+                Season selectedSeason = await seasonRepository.IsSelected();
+                teamResource.Season = mapper.Map<SeasonResource>(selectedSeason);   
 
-                return View("AddTeam", teamRes);
+                return View("AddTeam", teamResource);
             }
-            var newTeam = await teamRepository.AddTeam(teamResource);
+            var ok = await teamRepository.AddTeam(teamResource);
 
-            if(!newTeam)
+            if(!ok)
             {
                 return View("Error", $"Team {teamResource.Name} already exist in database!");
             }

@@ -8,5 +8,6 @@ namespace BetSystem.Repository
     {
         Task<IEnumerable<TeamStatus>> TeamStatusList();
         Task<IEnumerable<ProfitStatus>> ProfitStatusList();
+        Task<Statistics> Statistics();
     }
 }

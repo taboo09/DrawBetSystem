@@ -21,7 +21,7 @@ namespace BetSystem.Repository
 
         public async Task<IEnumerable<TeamResource>> GetTeams()
         {
-            var listTeams = await context.Teams.ToListAsync();
+            var listTeams = await context.Teams.Include(s =>s.Season).Where(s => s.Season.Selected).ToListAsync(); 
             var listTeamsResource = mapper.Map<List<Team>, List<TeamResource>>(listTeams);
             listTeamsResource.Sort((x, y) => x.Name.CompareTo(strB: y.Name));
 

@@ -3,11 +3,11 @@
 @{ string currency = ViewBag.Currency.Symbol; }
 
 <div id="bet_edit_info">
-    <h4>You are about to edit bet Id Nr: <span>@Model.Id</span></h4>
-    <h5>Team: <span>@Model.Match.Team.Name</span>, match <span>@Model.Match.Home - @Model.Match.Away</span>
-    from the date: <span>@Model.Match.Date.ToString("dd/MM/yyyy")</span></h5>
+    <h4>You are about to edit bet Id Nr: <span>@Model?.Id</span></h4>
+    <h5>Team: <span>@Model?.Match.Team.Name</span>, match <span>@Model?.Match.Home - @Model?.Match.Away</span>
+    from the date: <span>@Model?.Match.Date.ToString("dd/MM/yyyy")</span></h5>
     <h5>Cash Return:</h5>
-    <h3>@currency@Model.Match.CashReturn</h3>
+    <h3>@currency@Model?.Match.CashReturn</h3>
 
 <hr>
 

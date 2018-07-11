@@ -1,0 +1,44 @@
+@model BetSystem.Controllers.Resources.Statistics
+
+@{ string currency = ViewBag.Currency; }
+
+<div>
+    <h4 class="jumbotron" style="margin-bottom: 35px;">Weekly Profit:&nbsp;&nbsp; @currency@Model?.WeeklyProfit</h4>
+    <div class="total-profit">
+        <h4>TOTAL</h4>
+        <table>
+            <tr>
+                <td>Betting</td><td>@currency@Model?.TotalBet</td>
+            </tr>
+            <tr>
+                <td>Earning</td><td>@currency@Model?.TotalEarn</td>
+            </tr>
+            <tr>
+                <td>Profit</td><td style="color: #fff">@currency@Model?.Profit</td>
+            </tr>
+            <tr>
+                <td>Matches</td><td>@Model?.TotalMatches</td>
+            </tr>
+            <tr>
+                <td>Won</td><td>@Model?.TotalWon</td>
+            </tr>
+            <tr>
+                <td>Won %</td><td>@Model?.WonPercentage %</td>
+            </tr>
+        </table>
+    </div>
+    <div class="max-stats">
+        <h4>MAX</h4>
+        <table>
+            <tr>
+                <td>Stake</td><td>@currency@Model?.MaxStake</td>
+            </tr>
+            <tr>
+                <td>Return</td><td>@currency@Model?.MaxReturn</td>
+            </tr>
+            <tr>
+                <td>Odd</td><td>@Model?.MaxOdd</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -11,5 +11,7 @@ namespace BetSystem.Models
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
+        public int SeasonId { get; set; }
+        public Season Season { get; set; }
     }
 }

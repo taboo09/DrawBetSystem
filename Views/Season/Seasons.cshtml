@@ -1,0 +1,99 @@
+@model IEnumerable<BetSystem.Models.Season>
+
+@{ var season = Model.FirstOrDefault(x => x.Selected); }
+
+<title>Admin</title>
+
+<div class="container">
+    @await Component.InvokeAsync("SelectedSeason", new { title = "Admin Page", subTitle = "Create, Select or Close a Season. fix error for no season selected" })
+
+    <!-- <p class="divPopout" onclick="$('.popout-inside').load('@Url.Action("New", "Season")')">press here</p> -->
+
+    <p class="show-div">Add new Season</p>
+    <span class="field-validation-error">
+        @ViewBag.Error
+    </span>
+    
+    <div class="show-toggle" style="display:none">
+        @using (Html.BeginForm("New", "Season"))
+        {
+            var seasonModel = new BetSystem.Controllers.Resources.SeasonResource(); 
+
+            <div class="form-group">
+                @Html.Label("Name")
+                @Html.TextBox("Name", (string)seasonModel.Name, new { @class = "form-control" })
+            </div>
+
+            @Html.Label("Make season Selected?")
+            <div class="form-group">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        @Html.RadioButton("Selected", true, (bool)seasonModel.Selected ) Yes
+                    </label>
+                    
+                    <label class="btn btn-success active">
+                        @Html.RadioButton("Selected", false, (bool)seasonModel.Selected) No
+                    </label>
+                </div>
+            </div>
+
+            @Html.Hidden("id", seasonModel.Id)
+            <button type="submit" class="btn btn-primary">Add Season</button>
+        }
+    </div>
+
+    <h5>All Seasons</h5>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Date Start</th>
+                <th>Active</th>
+                <th>Date End</th>
+                <th>Selected</th>
+                <th>Teams</th>
+                <th>Bets</th>
+                <th>Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var s in Model)
+            {
+                <tr>
+                    <td>@s.Id</td>
+                    <td>@s.Name</td>
+                    <td>@s.DateStart.ToString("dd/MM/yyyy")</td>
+                    <td>@(s.Active ? "Yes" : "No")</td>
+                    @if(s.DateEnd != null) {
+                    <td>@s.DateEnd?.ToString("dd/MM/yyyy")</td>
+                    } else { 
+                    <td><span class="close-season" 
+                        onclick="$('.popout-inside').load('@Url.Action("Close","Season", new { id = s.Id })')">Close
+                        </span>
+                    </td> 
+                    }
+                    <td>@if(s.Selected) {
+                        <span class="glyphicon glyphicon-star" style="font-size: 120%;color:orange"></span>
+                        } else {
+                            <a href='@Url.Action("Select", "Season", new { id = s.Id })'>
+                                <span class="glyphicon glyphicon-star-empty" style="font-size: 120%"></span>
+                            </a>
+                        } 
+                    </td>
+                    <td>@s.Teams</td>
+                    <td>@s.Bets</td>
+                    <td>@s.Profit</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<!------------------- Popout div ------------------------>
+<div class="popout" style="display: none">
+    <div class="popout-inside">
+    </div>
+</div>

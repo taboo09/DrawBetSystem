@@ -8,11 +8,11 @@ $(document).ready(function(){
 
 // Display the nr of rows
 function getRows(){
-    $('h2.title span').empty();
+    $('.bets h3 span.bet-title').empty();
     var trs = $('tr').filter(function(){
         return $(this).css('display') != 'none';
     }).length-1;
-    $('h2.title span').append(trs);
+    $('.bets h3 span.bet-title').append(trs);
 };
 
 // top of the table links
@@ -74,6 +74,9 @@ $('input.edit').click(function(){
 $('td.delete-bet button').click(function(){
     $('div.popout').css('display','block');
 });
+$('span.close-season').click(function(){
+    $('div.popout').css('display','block');
+});
 
 // delete button
 var checkbox = $("#delbet");
@@ -86,8 +89,8 @@ checkbox.click(function(){
 /*********** Index **********************************/
 
 // change currency
-$('p.currency').click(function(){
-    var a = $('div.select-currency').toggle("slow");
+$('p.show-div').click(function(){
+    var a = $('div.show-toggle').toggle("slow");
 })
 
 // apply index for table rows
@@ -100,10 +103,11 @@ function getNumberTd(){
 
 // display div info
 function div_show(nr){
+    $('.team-info').addClass('hidden');
     $('#team'+ nr).fadeIn(500,'linear').removeClass('hidden').css('display','inline-block');
 }
 function div_hide(nr){
-    $('#team'+ nr).addClass('hidden');
+    // $('#team'+ nr).addClass('hidden');
 }
 
 /*************** Add Team ************/

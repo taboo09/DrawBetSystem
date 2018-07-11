@@ -12,11 +12,13 @@ namespace BetSystem.Mapping
             CreateMap<Team, TeamResource>();
             CreateMap<Match, MatchResource>();
             CreateMap<Bet, BetResource>();
+            CreateMap<Season, SeasonResource>();
 
             // API Resouces to Domain
             CreateMap<TeamResource, Team>();
             CreateMap<MatchResource, Match>();
             CreateMap<BetResource, Bet>();
+            CreateMap<SeasonResource, Season>();
         }
     }
 }

@@ -31,10 +31,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Stats">Stats</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Stats">Statistics</a></li>
                     <li><a asp-area="" asp-controller="Team" asp-action="New">Add Team</a></li>
                     <li><a asp-area="" asp-controller="Match" asp-action="New">Add Bet</a></li>
                     <li><a asp-area="" asp-controller="Bet" asp-action="GetBets">Bets</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="float:right">
+                    <li><a asp-area="" asp-controller="Season" asp-action="Seasons">Admin</a></li>
                 </ul>
             </div>
         </div>

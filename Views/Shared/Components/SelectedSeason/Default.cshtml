@@ -1,0 +1,14 @@
+@model BetSystem.Models.Season    
+
+<div class="jumbotron">
+    <h3>@ViewBag.Title <span class="bet-title"></span> </h3>
+    <h4>@ViewBag.SubTitle</h4>
+    <h5>Season: @Model?.Name</h5>
+    <h5>
+        Status: @{
+            if(!Model.Active) 
+            { <span class="validation-summary-errors"> Inactive</span>; }
+            else {<span>Active</span>;}
+            }
+    </h5>
+</div>

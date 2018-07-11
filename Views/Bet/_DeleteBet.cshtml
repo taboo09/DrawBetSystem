@@ -1,6 +1,6 @@
 @model BetSystem.Controllers.Resources.BetResource
 
-<h3>Delete Bet Id @Model.Id</h3>
+<h3>Delete Bet Id @Model?.Id</h3>
 <div class="delete-bet-view">
 @using (Html.BeginForm("DeleteBet", "Bet", new { id = Model.Id }))
 {

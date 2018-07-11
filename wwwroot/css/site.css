@@ -25,18 +25,21 @@ body {
 }
 
 .input-validation-error{
-    border: 1px solid red;
+    border: 1px solid orange;
 }
 .field-validation-error{
-    color:red;
+    color:orange;
     font-size: 80%;
 }
 .validation-summary-errors{
-    color:red;
+    color:orange;
 }
-
+button{
+    min-width: 100px;
+}
 form {
-    width: 40%;
+    max-width: 350px;
+    min-width: 300px;
 }
 form label{
     font-size: 1.3rem;
@@ -97,7 +100,8 @@ div.popout{
 	background-color: rgb(0,0,27);
 	overflow: auto;
 }
-div.edit-delete-bet{
+div.edit-delete-bet,
+div.popout-inside{
     position: relative;
     overflow: auto;
     margin: 0;
@@ -109,7 +113,7 @@ div.edit-delete-bet{
 	background-color: rgb(42, 25, 71);
 }
 div.delete-bet-view{
-    margin-bottom: 16px;
+    margin-bottom: 16px; 
 }
 div.delete-bet-view div.form-group input{
     padding: 0 16px;
@@ -150,15 +154,13 @@ td.select_team:hover{
     margin-left: -20px;
     font-size: 90%;
 }
-header{
+.jumbotron{
     background-color: #293949;
-    padding: 10px;
     margin: -2% 0 2% 0;
-    border-radius: 0 0 25px 25px;
-    text-align: center;
-    box-shadow: 0 2px 10px #777;
+    /* padding: 30px 15px; */
+    box-shadow: 0 2px 6px #777;
 }
-p.currency{
+p.show-div{
     cursor: pointer;
     width: fit-content;
     width: -moz-fit-content;
@@ -169,7 +171,7 @@ div.select-currency .form-group select{
     border: 1px solid #fff;
     border-radius: 10px;
 }
-div.select-currency .form-group, button{
+div.select-currency .form-group{
     width: 100px;
     display: inline-block;
 }
@@ -191,7 +193,7 @@ div.stats{
     width: 40%;
     margin-left: 5%
 }
-.stats h2,.stats h3{
+.stats h2,.stats h3, .stats h4{
     text-align: center;
 }
 div.total-profit{
@@ -282,10 +284,23 @@ div.teams-display button{
     border-radius: 5px;
     margin: 3px 2px;
     cursor: default;
+    padding: 4px 0;
 }
 div.teams-display button.btn-secondary{
     color: #df691a;
 }
 div.teams-display button.btn-link{
     border: 1px solid #df691a;
+}
+
+span.glyphicon-upload{
+    cursor: pointer;
+}
+span.close-season{
+    color:limegreen;
+}
+span.close-season:hover{
+    color: orange;
+    text-decoration: underline;
+    cursor:pointer;
 }
