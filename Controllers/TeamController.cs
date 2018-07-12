@@ -31,8 +31,11 @@ namespace BetSystem.Controllers
             var teamResource = new TeamResource();
             
             Season selectedSeason = await seasonRepository.IsSelected();
-            teamResource.SeasonId = selectedSeason.Id;
-            teamResource.Season = mapper.Map<SeasonResource>(selectedSeason);
+            
+            if (selectedSeason != null) {
+                teamResource.SeasonId = selectedSeason.Id;
+                teamResource.Season = mapper.Map<SeasonResource>(selectedSeason);
+            }
 
             return View("AddTeam", teamResource);
         }

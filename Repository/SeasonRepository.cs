@@ -38,8 +38,12 @@ namespace BetSystem.Repository
             season.DateStart = DateTime.Now;
             season.Active = true;
 
-            if (season.Selected) {
-                var seasonSelected = await IsSelected();
+            var seasonSelected = await IsSelected();
+
+            if (seasonSelected == null) {
+                season.Selected = true;
+            } 
+            else if (season.Selected) {
                 seasonSelected.Selected = false;
             }
 

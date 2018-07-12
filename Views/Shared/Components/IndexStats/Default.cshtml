@@ -3,7 +3,13 @@
 @{ string currency = ViewBag.Currency; }
 
 <div>
-    <h4 class="jumbotron" style="margin-bottom: 35px;">Weekly Profit:&nbsp;&nbsp; @currency@Model?.WeeklyProfit</h4>
+    <h4 class="jumbotron" style="margin-bottom: 35px;">Weekly Profit:&nbsp;&nbsp; 
+        @if(Model.WeeklyProfit < 0) {
+            <span>-@currency@Math.Abs(Model.WeeklyProfit)</span>
+        } else {
+            @currency@Model?.WeeklyProfit
+        }
+    </h4>
     <div class="total-profit">
         <h4>TOTAL</h4>
         <table>
@@ -14,7 +20,12 @@
                 <td>Earning</td><td>@currency@Model?.TotalEarn</td>
             </tr>
             <tr>
-                <td>Profit</td><td style="color: #fff">@currency@Model?.Profit</td>
+                <td>Profit</td>
+                @if(Model.Profit < 0) {
+                    <td style="color: #fff">-@currency@Math.Abs(Model.Profit)</td> 
+                } else {
+                    <td style="color: #fff">@currency@Math.Round(Model.Profit,2)</td>
+                }
             </tr>
             <tr>
                 <td>Matches</td><td>@Model?.TotalMatches</td>

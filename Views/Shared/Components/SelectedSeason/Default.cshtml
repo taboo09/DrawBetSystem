@@ -3,12 +3,20 @@
 <div class="jumbotron">
     <h3>@ViewBag.Title <span class="bet-title"></span> </h3>
     <h4>@ViewBag.SubTitle</h4>
-    <h5>Season: @Model?.Name</h5>
-    <h5>
-        Status: @{
-            if(!Model.Active) 
-            { <span class="validation-summary-errors"> Inactive</span>; }
-            else {<span>Active</span>;}
-            }
-    </h5>
+    @if(Model != null) 
+    {
+        <h5>Season: @Model?.Name</h5>
+        <h5>
+            Status: @{
+                if(!Model.Active) 
+                { <span class="validation-summary-errors"> Inactive</span>; }
+                else {<span>Active</span>;}
+                }
+        </h5>
+    } else 
+    {
+        <h3 class="validation-summary-errors">Please go to Admin page and add a season!</h3>  
+        <h4 class="validation-summary-errors">Teams and bets cannot be added if there is no active season.</h4>  
+    }
+    <p class="signature">by Marius</p>
 </div>

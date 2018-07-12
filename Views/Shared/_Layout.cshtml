@@ -44,9 +44,12 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - BetSystem</p>
+        
+        <footer class="container">
+            <div class="well well-sm" style="text-align:center">
+                @{var year = DateTime.Now.Year > 2018 ? "- DateTime.Now.Year.ToString()" : ""; }
+                <p>BetSystem App &copy; 2018 @year</p>
+            </div>
         </footer>
     </div>
 

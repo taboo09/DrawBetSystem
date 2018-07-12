@@ -41,7 +41,7 @@ namespace BetSystem
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ICurrencyRepository currencyRepo)
         {
             if (env.IsDevelopment())
             {
@@ -51,6 +51,11 @@ namespace BetSystem
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Seed Currency Table by default
+            currencyRepo.SeedCurrencyTable();
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
             app.UseStaticFiles();
 

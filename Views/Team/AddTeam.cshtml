@@ -5,30 +5,33 @@
 <div class="container">
     @await Component.InvokeAsync("SelectedSeason", new { title = "Add Team" })
 
-    @if(!Model.Season.Active) 
-       {
-           <h5 class="validation-summary-errors">Teams can not be added because the season is not active!</h5>
-       }
-
-    <div class="form-team">
-
-        @using (Html.BeginForm("AddTeam", "Team"))
+    @if(Model.Season != null) {
+        
+        @if(!Model.Season.Active) 
         {
-            <div class="form-group">
-                @Html.LabelFor(m => m.Name, "New Team")
-                @Html.TextBoxFor(m => m.Name,new { @class="form-control"})
-                @Html.ValidationMessageFor(m => m.Name)
-            </div>
-
-            @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.SeasonId)
-            @Html.HiddenFor(m => m.Season, Model.Season )
-
-            @Html.AntiForgeryToken()
-
-            <button type="submit" class="btn btn-primary" disabled="@(!Model.Season.Active)">Add</button>
+            <h5 class="validation-summary-errors">Teams can not be added because the season is not active!</h5>
         }
-    </div>
+
+        <div class="form-team">
+
+            @using (Html.BeginForm("AddTeam", "Team"))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, "New Team")
+                    @Html.TextBoxFor(m => m.Name,new { @class="form-control"})
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.SeasonId)
+                @Html.HiddenFor(m => m.Season, Model.Season )
+
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="btn btn-primary" disabled="@(!Model.Season.Active)">Add</button>
+            }
+        </div>
+    }
 
 
     <div class="teams-display">

@@ -15,9 +15,8 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    
+    position: relative;
 }
-
 
 /* QR code generator */
 #qrCode {
@@ -69,13 +68,24 @@ form > div.form-group > select > option{
     text-decoration: underline;
 }
 
-
+/* footer */
 footer{
-    height: 0px;
-    bottom: 0;
-    margin: 0 auto 2em auto;
-	padding: 0.6em 0 0.1em 0;
+    margin-top: 25px;
 }
+footer .well{
+    margin-top: 10px;
+    margin-bottom: -30px;
+    background-color: #293949;
+    box-shadow: 0 2px 6px #777;
+}
+footer p{
+    font-size: .8em;
+}
+footer p:last-child{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: italic;
+}
+
 #hidden{
     position: inherit;
     width: 50%;
@@ -157,7 +167,6 @@ td.select_team:hover{
 .jumbotron{
     background-color: #293949;
     margin: -2% 0 2% 0;
-    /* padding: 30px 15px; */
     box-shadow: 0 2px 6px #777;
 }
 p.show-div{
@@ -303,4 +312,14 @@ span.close-season:hover{
     color: orange;
     text-decoration: underline;
     cursor:pointer;
+}
+
+/* signature */
+p.signature{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: right;
+    color: orange;
+    font-size: .8em;
+    font-style: italic;
+    margin: auto -10px -30px auto;
 }

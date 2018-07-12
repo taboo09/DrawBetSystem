@@ -9,5 +9,6 @@ namespace BetSystem.Repository
         Task<IEnumerable<Currency>> GetCurrencies();
         Task<Currency> GetCurrency();
         Task<bool> SelectCurrency(int id);
+        Task SeedCurrencyTable();
     }
 }

@@ -5,9 +5,7 @@
 <title>Admin</title>
 
 <div class="container">
-    @await Component.InvokeAsync("SelectedSeason", new { title = "Admin Page", subTitle = "Create, Select or Close a Season. fix error for no season selected" })
-
-    <!-- <p class="divPopout" onclick="$('.popout-inside').load('@Url.Action("New", "Season")')">press here</p> -->
+    @await Component.InvokeAsync("SelectedSeason", new { title = "Admin Page", subTitle = "Create, Select or Close a Season" })
 
     <p class="show-div">Add new Season</p>
     <span class="field-validation-error">
@@ -35,6 +33,7 @@
                         @Html.RadioButton("Selected", false, (bool)seasonModel.Selected) No
                     </label>
                 </div>
+                <p style="font-size:0.75em">*Season will be automatically selected if there are no other seasons</p>
             </div>
 
             @Html.Hidden("id", seasonModel.Id)
@@ -89,7 +88,6 @@
             }
         </tbody>
     </table>
-
 </div>
 
 <!------------------- Popout div ------------------------>

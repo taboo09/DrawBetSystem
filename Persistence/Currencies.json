@@ -1,0 +1,22 @@
+[
+    {
+        "Name": "GBP",
+        "IsSelected": true,
+        "Symbol": "£"
+    },
+    {
+        "Name": "USD",
+        "IsSelected": false,
+        "Symbol": "$"
+    },
+    {
+        "Name": "EUR",
+        "IsSelected": false,
+        "Symbol": "€"
+    },
+    {
+        "Name": "None",
+        "IsSelected": false,
+        "Symbol": ""
+    }
+]
