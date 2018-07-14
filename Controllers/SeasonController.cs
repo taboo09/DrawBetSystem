@@ -10,14 +10,12 @@ namespace BetSystem.Controllers
     public class SeasonController : Controller
     {
         private readonly ISeasonRepository _seasonRepo;
-        private readonly IBetRepository _betRepository;
-        private readonly ITeamRepository _teamRepository;
+        private readonly ICurrencyRepository _currencyRepository;
 
-        public SeasonController(ISeasonRepository seasonRepo, IBetRepository betRepository, ITeamRepository teamRepository)
+        public SeasonController(ISeasonRepository seasonRepo, ICurrencyRepository currencyRepository)
         {
+            _currencyRepository = currencyRepository;
             _seasonRepo = seasonRepo;
-            _betRepository = betRepository;
-            _teamRepository = teamRepository;
         }
 
         public async Task<IActionResult> Seasons()
@@ -25,7 +23,9 @@ namespace BetSystem.Controllers
             var listSeasons = await _seasonRepo.GetSeasons();
             var season = await _seasonRepo.IsSelected();
 
-            if(season.Active) await _seasonRepo.UpdateSeason();
+            if (season.Active) await _seasonRepo.UpdateSeason();
+
+            ViewBag.Currency = await _currencyRepository.GetCurrency();
 
             return View(listSeasons);
         }
@@ -47,23 +47,23 @@ namespace BetSystem.Controllers
             {
                 ViewBag.Error = "Season name is required.";
 
-                return View("Seasons", listSeasons);  
+                return View("Seasons", listSeasons);
             }
 
-            if(!await _seasonRepo.AddSeason(season)) 
+            if (!await _seasonRepo.AddSeason(season))
             {
                 ViewBag.Error = "There is already a season with the same name in database.";
 
                 return View("Seasons", listSeasons);
             }
 
-            return RedirectToAction("Seasons");   
+            return RedirectToAction("Seasons");
         }
 
         [HttpPost]
         public IActionResult Add(SeasonResource season)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return RedirectToAction("New");
             }
@@ -78,9 +78,12 @@ namespace BetSystem.Controllers
 
             var season = seasons.ToList().Find(x => x.Id == id);
 
-            if(season != null && season.Active == true){
+            if (season != null && season.Active == true)
+            {
                 return PartialView("_CloseSeason", season);
-            } else {
+            }
+            else
+            {
                 return View("Error", "Season does not exist or it is already closed.");
             }
         }
@@ -88,7 +91,7 @@ namespace BetSystem.Controllers
         public async Task<IActionResult> CloseSeason(int id)
         {
             var closed = await _seasonRepo.CloseSeason(id);
-            
+
             if (closed) return RedirectToAction("Seasons");
 
             return RedirectToAction("Seasons");

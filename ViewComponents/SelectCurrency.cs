@@ -21,14 +21,3 @@ namespace BetSystem.ViewComponents
         }
     }
 }
-
-// <div class="select-currency show-toggle" style="display:none">
-//             @using (Html.BeginForm("SelectCurrency", "Home"))
-//             {
-//                 <div class="form-group">
-//                     @Html.DropDownList("Id", new SelectList(currencies, "Id", "Name"), new { @class="form-control" })
-//                 </div>
-//                 <button type="submit" class="btn btn-secondary">Select</button>
-//             }
-//         </div>
-// @{ IEnumerable<BetSystem.Models.Currency> currencies = ViewBag.Currencies; }

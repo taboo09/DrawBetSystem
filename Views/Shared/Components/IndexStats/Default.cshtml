@@ -2,15 +2,15 @@
 
 @{ string currency = ViewBag.Currency; }
 
-<div>
-    <h4 class="jumbotron" style="margin-bottom: 35px;">Weekly Profit:&nbsp;&nbsp; 
+<div class="row">
+    <h4 class="jumbotron weekly-profit" style="margin-bottom: 35px;">Weekly Profit:&nbsp;&nbsp; 
         @if(Model.WeeklyProfit < 0) {
             <span>-@currency@Math.Abs(Model.WeeklyProfit)</span>
         } else {
             @currency@Model?.WeeklyProfit
         }
     </h4>
-    <div class="total-profit">
+    <div class="total-profit col-xs-6 col-sm-6 col-md-6">
         <h4>TOTAL</h4>
         <table>
             <tr>
@@ -38,7 +38,7 @@
             </tr>
         </table>
     </div>
-    <div class="max-stats">
+    <div class="max-stats col-xs-6 col-sm-6 col-md-6">
         <h4>MAX</h4>
         <table>
             <tr>

@@ -16,81 +16,83 @@
         <p class="show-div">Currency: @ViewBag.Currency.Name</p>
         @await Component.InvokeAsync("SelectCurrency")
 
-        <div class="team-status">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Nr</th>
-                    <th>Team</th>
-                    <th>Played/Won</th>
-                    <th>Won %</th>
-                    <th>Total Bet</th>
-                    <th>Total Earn</th>
-                    <th>Profit</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var t in Model)
-                {
-                <tr onMouseOver="div_show($('tr').index(this))" onMouseOut="div_hide($('tr').index(this))">
-                    <td></td>
-                    <td>@t.Name</td>
-                    <td>@t.MatchesPlayed / @t.Wons</td>
-                    <td>@t.Percentage @p</td>
-                    <td>@currency@t.MoneyBet</td>
-                    <td>@currency@t.MoneyEarn</td>
-                    @if(t.Profit < 0) {
-                    <td>-@currency@Math.Abs(t.Profit)</td>
-                    } 
-                    else {
-                        <td><span class="profit-high">@currency@Math.Round(t.Profit,2)</span></td>
-                    }
-                </tr>
-                }
-            </tbody>
-        </table>
-        </div>
-
-        <div class="stats container">
-            @await Component.InvokeAsync("IndexStats", @currency)
-
-            <!-- Display info for each team, div show on hover table team tr -->
-            @foreach(var t in Model) 
-            {
-                numberTeams = numberTeams + 1;
-                string idTeam = "team" + numberTeams.ToString(); 
-                <div id="@idTeam" class="team-info hidden">
-                    <h2>@t.Name</h2>
-                    <div class="info">
-                        <h4>Profit</h4>
-                        <div class="info-number">
-                            @if(t.Profit < 0 ){
-                                <h4>-@currency@Math.Abs(t.Profit)</h4>
-                            } else {
-                                <h4>@currency@t.Profit</h4>
+        <div class="row">
+            <div class="team-status col-sm-12 col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Team</th>
+                            <th>Played/Won</th>
+                            <th>Won %</th>
+                            <th>Total Bet</th>
+                            <th>Total Earn</th>
+                            <th>Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var t in Model)
+                        {
+                        <tr onMouseOver="div_show($('tr').index(this))" onMouseOut="div_hide($('tr').index(this))">
+                            <td></td>
+                            <td>@t.Name</td>
+                            <td>@t.MatchesPlayed / @t.Wons</td>
+                            <td>@t.Percentage @p</td>
+                            <td>@currency@t.MoneyBet</td>
+                            <td>@currency@t.MoneyEarn</td>
+                            @if(t.Profit < 0) {
+                            <td>-@currency@Math.Abs(t.Profit)</td>
+                            } 
+                            else {
+                                <td><span class="profit-high">@currency@Math.Round(t.Profit,2)</span></td>
                             }
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="stats col-sm-12 col-md-5">
+                @await Component.InvokeAsync("IndexStats", @currency)
+
+                <!-- Display info for each team, div show on hover table team tr -->
+                @foreach(var t in Model) 
+                {
+                    numberTeams = numberTeams + 1;
+                    string idTeam = "team" + numberTeams.ToString(); 
+                    <div id="@idTeam" class="team-info hidden">
+                        <h2>@t.Name</h2>
+                        <div class="info">
+                            <h4>Profit</h4>
+                            <div class="info-number">
+                                @if(t.Profit < 0 ){
+                                    <h4>-@currency@Math.Abs(t.Profit)</h4>
+                                } else {
+                                    <h4>@currency@t.Profit</h4>
+                                }
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4>Nr. Matches</h4>
+                            <div class="info-number">
+                                <h4>@t.MatchesPlayed</h4>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4>Won %</h4>
+                            <div class="info-number">
+                                <h4>@t.Percentage @p</h4>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4>Next Stake</h4>
+                            <div class="info-number">
+                                <h4>@currency@t.NextStake</h4>
+                            </div>
                         </div>
                     </div>
-                    <div class="info">
-                        <h4>Nr. Matches</h4>
-                        <div class="info-number">
-                            <h4>@t.MatchesPlayed</h4>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <h4>Won %</h4>
-                        <div class="info-number">
-                            <h4>@t.Percentage @p</h4>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <h4>Next Stake</h4>
-                        <div class="info-number">
-                            <h4>@currency@t.NextStake</h4>
-                        </div>
-                    </div>
-                </div>
-            }
+                }
+            </div>
         </div>
 </div>
 

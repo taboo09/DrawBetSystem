@@ -1,6 +1,6 @@
 @model IEnumerable<BetSystem.Models.Season>
 
-@{ var season = Model.FirstOrDefault(x => x.Selected); }
+@{ string currency = ViewBag.Currency.Symbol; }
 
 <title>Admin</title>
 
@@ -50,11 +50,11 @@
                 <th>Name</th>
                 <th>Date Start</th>
                 <th>Active</th>
-                <th>Date End</th>
+                <th>Date Closed</th>
                 <th>Selected</th>
                 <th>Teams</th>
                 <th>Bets</th>
-                <th>Profit</th>
+                <th>Profit @currency</th>
             </tr>
         </thead>
         <tbody>

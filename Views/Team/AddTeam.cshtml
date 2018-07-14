@@ -5,6 +5,7 @@
 <div class="container">
     @await Component.InvokeAsync("SelectedSeason", new { title = "Add Team" })
 
+    <div class="row">
     @if(Model.Season != null) {
         
         @if(!Model.Season.Active) 
@@ -12,7 +13,7 @@
             <h5 class="validation-summary-errors">Teams can not be added because the season is not active!</h5>
         }
 
-        <div class="form-team">
+        <div class="form-team col-sm-12 col-md-7">
 
             @using (Html.BeginForm("AddTeam", "Team"))
             {
@@ -34,14 +35,15 @@
     }
 
 
-    <div class="teams-display">
-        <h2>Teams in the Season:</h2>
-            @if(ViewBag.Teams.Count == 0) {
-                <button>None</button>
-            }
-            @foreach(var t in ViewBag.Teams)
-            {
-                <button>@t.Name</button>
-            }
+        <div class="teams-display col-sm-12 col-md-5">
+            <h2>Teams in the Season:</h2>
+                @if(ViewBag.Teams.Count == 0) {
+                    <button>None</button>
+                }
+                @foreach(var t in ViewBag.Teams)
+                {
+                    <button>@t.Name</button>
+                }
+        </div>
     </div>
 </div>

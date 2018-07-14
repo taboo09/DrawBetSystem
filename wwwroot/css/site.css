@@ -69,21 +69,10 @@ form > div.form-group > select > option{
 }
 
 /* footer */
-footer{
-    margin-top: 25px;
-}
-footer .well{
-    margin-top: 10px;
-    margin-bottom: -30px;
-    background-color: #293949;
-    box-shadow: 0 2px 6px #777;
-}
 footer p{
-    font-size: .8em;
-}
-footer p:last-child{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style: italic;
+    font-size: .8em;
 }
 
 #hidden{
@@ -150,14 +139,12 @@ td.select_team:hover{
     text-decoration: underline;
 }
 .form-team{
-    width: 60%;
     float: left;
 }
 .form-team form{
     width: 70%;
 }
 .teams-display{
-    width: 40%;
     display: inline-block;
 }
 .teams-display ol{
@@ -193,29 +180,22 @@ div.select-currency button{
     padding: 0;
 }
 div.team-status{
-    width: 55%;
-    float: left;
     border-right: 1px solid #596a7b;
 }
-div.stats{
-    display: inline-block;
-    width: 40%;
-    margin-left: 5%
+.weekly-profit{
+    margin: 0 15%;
 }
+
 .stats h2,.stats h3, .stats h4{
     text-align: center;
 }
 div.total-profit{
-    width: 55%;
-    float: left;
     border-right: 1px solid #596a7b;
 }
-div.max-stats{
-    width: 45%;
-    float: left;
-}
+
 .stats table{
-    margin-left: 5%;
+    width: 50%;
+    margin: 0 auto !important;
 }
 div.stats table td {
     padding: 4px 15px;
