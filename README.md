@@ -12,9 +12,10 @@ From terminal or command prompt type `dotnet restore`.
 Finally type `dotnet run`.
 
 ## How it works
-1. Add some teams you want to bet on.
-2. Add bets on your added teams. (Note: the app is based on DRAW bets!)
+1. Add a season, from Admin page. This option allows you to add teams and bets.
+2. Add some teams you want to bet on.
+3. Add bets on your added teams. (Note: the app is based on DRAW bets!)
 
-You can add, edit or delete bets and visualizing a bunch of statistics for teams, each team's profit, money-in and so on...
+You can add, edit or delete bets and visualizing a bunch of statistics for teams, seasons, each team's profit, money-in and so on...
 
 # Good Luck!
