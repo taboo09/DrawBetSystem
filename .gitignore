@@ -2,3 +2,7 @@ obj
 /bin
 /.vscode
 migrations
+betapicontroller.cs
+currencyapicontroller.cs
+teamapicontroller.cs
+matchapicontroller.cs
