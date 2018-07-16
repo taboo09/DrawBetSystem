@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using BetSystem.Models;
 using BetSystem.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
-namespace BetSystem.Repository 
+namespace BetSystem.Repository
 {
     public class CurrencyRepository : ICurrencyRepository
     {
@@ -44,23 +43,6 @@ namespace BetSystem.Repository
             await context.SaveChangesAsync();
 
             return true;
-        }
-
-        public async Task SeedCurrencyTable() 
-        {
-            var currenciesFromDB = await GetCurrencies();
-
-            if (!currenciesFromDB.Any()) {
-                var currencyData = System.IO.File.ReadAllText("Persistence/Currencies.json");
-                var currencies = JsonConvert.DeserializeObject<List<Currency>>(currencyData);
-
-                foreach (var currency in currencies)
-                {
-                    context.Add(currency);
-                }
-
-                await context.SaveChangesAsync();
-            }
         }
     }
 }

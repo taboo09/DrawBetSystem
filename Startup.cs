@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BetSystem.Persistence;
+﻿using BetSystem.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using BetSystem.Controllers.Resources;
 using BetSystem.Repository;
+using BetSystem.Helper;
 
 namespace BetSystem
 {
@@ -26,12 +23,14 @@ namespace BetSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<SeedCurrency>();
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IBetRepository, BetRepository>();
             services.AddScoped<ICurrencyRepository, CurrencyRepository>();
             services.AddScoped<ISeasonRepository, SeasonRepository>();
+            
 
             services.AddAutoMapper();
 
@@ -41,7 +40,7 @@ namespace BetSystem
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ICurrencyRepository currencyRepo)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedCurrency seeder)
         {
             if (env.IsDevelopment())
             {
@@ -53,7 +52,7 @@ namespace BetSystem
             }
 
             // Seed Currency Table by default
-            currencyRepo.SeedCurrencyTable();
+            seeder.Seed();
 
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 

@@ -1,11 +1,6 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using BetSystem.Controllers.Resources;
-using BetSystem.Models;
-using BetSystem.Persistence;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using BetSystem.Repository;
 

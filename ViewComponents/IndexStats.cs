@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using BetSystem.Controllers.Resources;
 using BetSystem.Repository;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BetSystem.Controllers.Resources;
@@ -23,7 +22,7 @@ namespace BetSystem.Controllers
             var listSeasons = await _seasonRepo.GetSeasons();
             var season = await _seasonRepo.IsSelected();
 
-            if (season.Active) await _seasonRepo.UpdateSeason();
+            if (season != null && season.Active) await _seasonRepo.UpdateSeason();
 
             ViewBag.Currency = await _currencyRepository.GetCurrency();
 
@@ -42,6 +41,8 @@ namespace BetSystem.Controllers
         public async Task<IActionResult> New(SeasonResource season)
         {
             var listSeasons = await _seasonRepo.GetSeasons();
+
+            ViewBag.Currency = await _currencyRepository.GetCurrency();
 
             if (!ModelState.IsValid)
             {

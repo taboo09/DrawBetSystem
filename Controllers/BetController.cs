@@ -1,7 +1,5 @@
 using System.Threading.Tasks;
-using AutoMapper;
 using BetSystem.Controllers.Resources;
-using BetSystem.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using BetSystem.Repository;
 
