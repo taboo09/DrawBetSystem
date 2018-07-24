@@ -33,7 +33,7 @@ body {
 .validation-summary-errors{
     color:orange;
 }
-button{
+form button, .teams-display button{
     min-width: 100px;
 }
 form {
@@ -69,6 +69,9 @@ form > div.form-group > select > option{
 }
 
 /* footer */
+footer{
+    margin-top: -20px;
+}
 footer p{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style: italic;
@@ -78,13 +81,6 @@ footer p{
 #hidden{
     position: inherit;
     width: 50%;
-}
-
-td div.winner{
-    background-color: green;
-    width: 48%;
-    text-align: center;
-    /* padding: 5%; */
 }
 
 /* popout div */
@@ -119,9 +115,10 @@ div.delete-bet-view div.form-group input{
     height: 30px;
 }
 
+/* bet edit */
 div#bet_edit_info span{
-    font-size: 125%;
-    font-weight: bold;
+    font-size: 120%;
+    /* font-weight: bold; */
 }
 div#bet_edit_info input{
     width: 40%;
@@ -153,7 +150,7 @@ td.select_team:hover{
 }
 .jumbotron{
     background-color: #293949;
-    margin: -2% 0 2% 0;
+    margin: -3% 0 2% 0;
     box-shadow: 0 2px 6px #777;
 }
 p.show-div{
@@ -194,16 +191,12 @@ div.total-profit{
 }
 
 .stats table{
-    width: 50%;
+    width: auto;
     margin: 0 auto !important;
 }
 div.stats table td {
     padding: 4px 15px;
     font-size: 1.7rem;
-}
-div.stats table td:last-child {
-    color: burlywood;
-    font-weight: 600;
 }
 
 /* team-info */
@@ -228,20 +221,12 @@ div.info-number{
     background-color: #001f3f;
 }
 
-
-
 .team-status table{
     border:0;
 }
 .team-status table > tbody > tr > td{
     padding: 3px;
 }
-.team-status table > tbody > tr > td span.profit-high{
-    background-color: green;
-    text-align: center;
-    padding: 3px 10px;
-}
-
 
 div.popout{
     width: 100%;

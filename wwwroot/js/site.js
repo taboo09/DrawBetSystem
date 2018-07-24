@@ -8,11 +8,11 @@ $(document).ready(function(){
 
 // Display the nr of rows
 function getRows(){
-    $('.bets h3 span.bet-title').empty();
+    $('.bets span.bet-title').empty();
     var trs = $('tr').filter(function(){
         return $(this).css('display') != 'none';
     }).length-1;
-    $('.bets h3 span.bet-title').append(trs);
+    $('.bets span.bet-title').append(trs);
 };
 
 // top of the table links

@@ -22,9 +22,9 @@
             <tr>
                 <td>Profit</td>
                 @if(Model.Profit < 0) {
-                    <td style="color: #fff">-@currency@Math.Abs(Model.Profit)</td> 
+                    <td style="color:darkorange">-@currency@Math.Abs(Model.Profit)</td> 
                 } else {
-                    <td style="color: #fff">@currency@Math.Round(Model.Profit,2)</td>
+                    <td style="color:lime">@currency@Math.Round(Model.Profit,2)</td>
                 }
             </tr>
             <tr>

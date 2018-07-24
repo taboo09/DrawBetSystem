@@ -7,7 +7,7 @@
 <div class="container">
     @await Component.InvokeAsync("SelectedSeason", new { title = "Admin Page", subTitle = "Create, Select or Close a Season" })
 
-    <p class="show-div">Add new Season</p>
+    <p class="show-div">Add new Season <i class="glyphicon glyphicon-arrow-down"></i></p>
     <span class="field-validation-error">
         @ViewBag.Error
     </span>

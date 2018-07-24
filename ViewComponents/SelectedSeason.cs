@@ -12,12 +12,13 @@ namespace BetSystem.ViewComponents
         {
             this.seasonRepo = seasonRepo;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string title, string subTitle)
+        public async Task<IViewComponentResult> InvokeAsync(string title, string subTitle, string info)
         {
             var season = await seasonRepo.IsSelected();
 
             ViewBag.Title = title;
             ViewBag.SubTitle = subTitle;
+            ViewBag.Info = info;
 
             return View(season);
         }

@@ -12,6 +12,8 @@ namespace BetSystem
 {
     public class Program
     {
+        private const string Urls = "http://localhost:5050";
+
         public static void Main(string[] args)
         {
             BuildWebHost(args).Run();
@@ -20,6 +22,7 @@ namespace BetSystem
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseUrls(Urls)
                 .Build();
     }
 }

@@ -4,15 +4,12 @@
 @{ string currency = ViewBag.Currency.Symbol; }
 @{ int NrBets = 0; }
 @{ string classTr = "settled"; }
+@{ string info = Model.Any() ? "" : "There are no Bets to be displayed!"; }
 
 <title>All Bets</title>
 
 <div class="container bets">
-    @await Component.InvokeAsync("SelectedSeason", new { title = "Displayed Bets: " })
-
-    @if(!Model.Any()) {
-        <h5 class="validation-summary-errors">There are no Bets to be displayed!</h5>
-    }
+    @await Component.InvokeAsync("SelectedSeason", new { title = "Displayed Bets: ", info = @info })
 
     <div class="display-options-bets">
         <span class="all">
@@ -43,7 +40,7 @@
                 <th>Stake</th>
                 <th>Total</th>
                 <th>Won</th>
-                <th>Withdrawal</th>
+                <th>Cash Out</th>
                 <th>Return <span class="glyphicon glyphicon-upload" onclick="tableSort('nth-child(10)','desc')"></span></th>
             </tr>
         </thead>
@@ -63,7 +60,7 @@
                     <td>@currency@item.Match.CashReturn</td>
                     
                     @if(item.Won == true) 
-                    { <td><div class="winner"> Yes</div></td> }
+                    { <td style="color:lime">Yes</td> }
                     @if(item.Won == false) 
                     { <td>No</td> }
                     @if(item.Won == null) 
@@ -75,9 +72,11 @@
                     }
                     <td>@currency@item.Withdrawal</td>
                     <td>@currency@item.Profit</td>
-                    <td class="delete-bet" style="display:none"><button type="button" 
-                    onclick="$('.edit-delete-bet').load('@Url.Action("FindBet","Bet", new { id = item.Id })')"
-                    class="btn btn-danger btn-sm" style="padding:0 5px; margin:-2px">Delete</button></td>
+                    <td class="delete-bet" style="display:none">
+                        <button onclick="$('.edit-delete-bet').load('@Url.Action("FindBet","Bet", new { id = item.Id })')"
+                            class="btn btn-danger btn-sm" style="padding:0 5px;min-width:auto;font-size:.7em">
+                        <i class="glyphicon glyphicon-remove"></i></button>
+                    </td>
                 </tr>
             }
         </tbody>

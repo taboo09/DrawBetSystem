@@ -1,21 +1,13 @@
 @model BetSystem.Controllers.Resources.MatchResource
 
 @{ bool active = Model.Teams.Any() ? Model.Teams.First().Season.Active : true; }
+@{ string info = active ? "" : "New Bet cannot be added because the season is not active!"; }
+@{ info = !Model.Teams.Any() ? "Please add Teams first!" : info; }
 
 <title>Add Bet</title>
 
 <div class="container">
-    @await Component.InvokeAsync("SelectedSeason", new { title = "Add Bet" })
-
-    @if(!Model.Teams.Any())
-    {
-        <h5 class="validation-summary-errors">Please add teams first!</h5>
-    }
-
-    @if(!active) 
-    {
-       <h5 class="validation-summary-errors">Bets can not be added because the season is not active!</h5>
-    }
+    @await Component.InvokeAsync("SelectedSeason", new { title = "Add Bet", info = @info })
 
     @using (Html.BeginForm("AddMatch", "Match"))
     {
