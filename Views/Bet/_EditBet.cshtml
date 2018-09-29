@@ -30,7 +30,7 @@
         <h5>Cash Out? (0, if the bet was lost):</h5>
         <input class="form-control" data-val="true" 
                 data-val-required="The Withdrawal field is required." id="Withdrawal"
-                name="Withdrawal" type="number" step="any" value="0">
+                name="Withdrawal" type="number" step="any" value="0" max="@Model?.Match.CashReturn">
     </div>
 
     @Html.HiddenFor(m => m.Id)
