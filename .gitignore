@@ -6,3 +6,5 @@ betapicontroller.cs
 currencyapicontroller.cs
 teamapicontroller.cs
 matchapicontroller.cs
+wwwroot
+appsettings.json
