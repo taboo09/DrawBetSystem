@@ -288,3 +288,21 @@ p.signature{
     font-style: italic;
     margin: auto -10px -30px auto;
 }
+
+/* datepicker theme */
+.datepicker-dropdown {
+    top: 0;    
+    left: 0;
+    padding: 4px;
+    background-color: #2C6E8E;
+    border-radius: 10px;
+}    
+.datepicker table tr td.day:hover, .datepicker table tr td.focused {
+    background-color: #f59e00;
+    cursor: pointer;
+}
+.datepicker table tr td.today:hover {
+    color: #FFFFFF;
+    background-color: #884400;
+    border-color: #f59e00;
+}

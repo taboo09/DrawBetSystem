@@ -5,6 +5,7 @@
 @{ int NrBets = 0; }
 @{ string classTr = "settled"; }
 @{ string info = Model.Any() ? "" : "There are no Bets to be displayed!"; }
+@{ int unsettledBets = Model.Count(x => x.Won == null); }
 
 <title>All Bets</title>
 
@@ -19,7 +20,7 @@
             display last 10
         </span>|
         <span class="unsettled">
-            display unsettled
+            display unsettled @if(unsettledBets > 0) { <span>(@unsettledBets.ToString())</span> }
         </span>
         <div class="delete-bet" style="@(active ? "display:block" : "display:none")">
             <label  for="delbet">

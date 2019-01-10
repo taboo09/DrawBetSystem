@@ -2,6 +2,10 @@
 $(document).ready(function(){
     getRows();
     getNumberTd();
+
+    $('#Date').datepicker({
+        format: 'dd M yyyy',
+    });
 });
 
 /****************** Bets *******************/
